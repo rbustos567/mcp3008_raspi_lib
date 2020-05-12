@@ -1,0 +1,18 @@
+
+
+Raspberry pi 3 C library for the MCP3008 ADC chip
+
+This personal project is a quick solution for any raspberry pi 3 user who has a MCP3008 chip and wishes to 
+read external analog signal.
+
+As we know the raspberry pi 3 contains several gpios, however, none of these support analog signals. 
+There are different ways to solve this problem, the easiest it consists in connecting a ADC to 
+the gpios and configure them.
+
+This c library provides the neccesary functions to quickly start using your raspberry 
+to read any analog values that are connected to the channels of the MCP3008.
+
+To configure and setup the raspberry pi 3 with the MCP3008 read the SETUP file.
+
+For installation and usage of the library read the file INSTALL.
+
