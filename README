@@ -9,8 +9,8 @@ As we know the raspberry pi 3 contains several gpios, however, none of these sup
 There are different ways to solve this problem, the easiest it consists in connecting a ADC to 
 the gpios and configure them.
 
-This c library provides the neccesary functions to quickly start using your raspberry 
-to read any analog values that are connected to the channels of the MCP3008.
+This C library provides the necessary functions to quickly start using your raspberry pi 3
+to read any analog signal connected through the MCP3008.
 
 To configure and setup the raspberry pi 3 with the MCP3008 read the SETUP file.
 
