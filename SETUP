@@ -1,0 +1,115 @@
+
+Setting up raspberry pi 3+ with the mcp3008 chip
+------------------------------------------------
+
+In order to read the analog inputs from the mcp3008 chip through the
+raspberry pi we need to make some connections between both of these.
+
+Also, we will have to enable the SPI interface on the raspberry pi.
+
+Steps
+-----
+
+Enabling the SPI interface
+--------------------------
+
+Execute the following commands:
+
+sudo apt-get update
+sudo apt-get upgrade
+
+sudo vi /boot/config.txt
+
+Add the following line at the bottom of the file:
+
+dtparam=spi=on
+
+save it file and exit
+
+and now reboot:
+
+sudo shutdown -r now
+
+
+Checking if SPI is enabled
+--------------------------
+
+use the following command:
+
+lsmod | grep spi
+
+Look for both:
+
+spidev
+spi_bcm2835 or spi_bcm2708
+
+If you do not have these you might have to re-build the kernel
+source code with the SPI options enabled. And then try again this and
+the previous step.
+
+
+Connecting raspberry pi 3+ with mcp3008 analog to digital converter
+-------------------------------------------------------------------
+
+For these steps you will need a breadboard and 6 x female/male jumper
+wires.
+
+The pins connections are as shown below:
+
+Raspberry pi            mcp3008 analog to digital converter
+------------            ----------------------------------
+PIN 1 (3v3)             PIN 16 (VDD) and PIN 15 (VREF) 
+PIN 6 (Ground)          PIN 14 (AGND) and PIN 9 (DGND)
+PIN 19 (GPIO 10-MOSI)   PIN 11 (DIN)
+PIN 21 (GPIO 9-MISO)    PIN 12 (DOUT)
+PIN 23 (GPIO 11-SCLK)   PIN 13 (CLK)
+PIN 24 (GPIO 8-CE0)     PIN 10 (CS/SHDN)
+
+
+references:
+
+raspberrypi.org/documentation/usage/gpi
+ww1.microchip.com/downloads/en/DeviceDoc/21295d.pdf
+
+Connecting a test analog input to the mcp3008 (Optional)
+-------------------------------------------------------
+
+To read test analog input I used a potenciometer of 10 KOhms.
+
+Because it only has 3 pins you will need find which one
+is the VCC, GND and the output. Usually the stand alone pin
+is the output. The other two which are on the same side can
+be connected in any order to GND and VCC.
+
+So will have to connect them like this:
+
+
+Potentiometer 10K        Raspberry pi
+-----------------        ------------
+VCC PIN                  PIN 1 (3v3)
+GND PIN                  PIN 6 (Ground)                        
+
+
+                         mcp3008 analog to digital
+                         -------------------------
+OUTPUT PIN               Any channel - from PIN 1(CH0) to PIN 8(CH7)
+
+
+
+Using the mcp3008 library
+-------------------------
+
+Example: If you connected the potentiometer output to the analog 
+channel 2 (PIN 3) and you would like to read the voltage of that single 
+channel (single mode), you will have to call the function like this:
+
+unsigned short ch = 2;
+bool single_mode = true;
+float out;
+
+get_volt_input_from_mcp3008_channel(ch, single_mode, &out);
+
+printf("channel %d voltage = %f\n", ch, out);
+
+
+

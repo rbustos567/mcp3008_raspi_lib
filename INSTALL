@@ -1,0 +1,36 @@
+
+How to install the library
+--------------------------
+
+
+Building the library
+-------------------
+
+First, build the content of the lib/ directory using the command:
+
+make
+
+This will create the shared library. In this case, it will create
+the .so version file and a soft link file.
+
+Using the library with an application
+--------------------------------------
+
+The examples/ directory contains an application that tests the library.
+
+Building the application
+------------------------
+
+To build the application use the command:
+
+make
+
+This will generate the file mcp3008_raspi_test.bin in the same directory.
+
+Executig the test application
+-----------------------------
+
+And now run it with admin permissions:
+
+sudo ./mcp3008_raspi_test.bin
+
